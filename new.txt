@@ -1,5 +1,2 @@
-<<<<<<< HEAD
 dong lenh binh thuong
-=======
-day la dong lenh de conflick file
->>>>>>> a405b657c3485a28fae5a628cdbea7dd29e0cdda
+
