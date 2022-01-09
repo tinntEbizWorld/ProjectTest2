@@ -22,19 +22,37 @@ io.on('connection',function(socket){
 
     //Tell the client that this is our id for the server
     socket.emit('register',{id:thisPlayerID});
-    socket.emit('spawm', player);//Tell myseft have spawned
+    socket.emit('spawn', player);//Tell myseft have spawned
     socket.broadcast.emit('spawn',player);//Tell other I have spawned
 
+    
     //Tell myself about everyone else in game
     for(var playerID in players){
         if(playerID !=thisPlayerID){
-            socket.emit('spawn',player[playerID]);
+            socket.emit('spawn',players[playerID]);
         }
     }
+
+    //Positional Data from client
+    socket.on('updatePosition',function(data){
+        player.position.x = data.position.x;
+        player.position.y = data.position.y;
+        
+        socket.broadcast.emit('updatePosition',player);
+    });
+
+    socket.on('updateRotation',function(data){
+        player.tankRotation = data.tankRotation;
+        player.barrelRotation = data.barrelRotation;
+
+        socket.broadcast.emit('updateRotation',player);
+    });
 
     socket.on('disconnect', function(){
         console.log('A player has disconnected');
         delete players[thisPlayerID];
         delete sockets[thisPlayerID];
+
+        socket.broadcast.emit("disconnected",player);
     });
 });
