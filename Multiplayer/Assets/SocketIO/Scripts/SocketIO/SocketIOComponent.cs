@@ -165,10 +165,14 @@ namespace SocketIO
 		{
 			Close();
 		}
+        public virtual void LateUpdate()
+        {
+            
+        }
 
-		#endregion
+        #endregion
 
-		#region Public Interface
+        #region Public Interface
 
         public void SetHeader(string header, string value) {
             ws.SetHeader(header, value);

@@ -13,6 +13,19 @@ public class NetworkingClient : SocketIOComponent
     [SerializeField]
     private GameObject playerFrefab;
 
+
+    [Header("Minimap")]
+    //public GameObject[] players;
+    public static GameObject Player;
+    [SerializeField]
+    private Camera cameramini;
+
+    public GameObject makerPrefab;
+    //public GameObject playerObject;
+    public RectTransform makerParentRectTransform;
+    private List<(ObjectivePosition objectivePosition, RectTransform makerRectTransform)> currentObjectives;
+
+    //public Camera minimapCamera;
     public static string ClientID { get; private set; }
 
     private Dictionary<string, NetworkIdentity> serverObjects;
@@ -21,13 +34,40 @@ public class NetworkingClient : SocketIOComponent
     public override void Start()
     {
         base.Start();
+        currentObjectives = new List<(ObjectivePosition objectivePosition, RectTransform makerRectTransform)>();
+
         initialize();
         setupEvents();
+        
     }
 
     public override void Update()
     {
         base.Update();
+        foreach ((ObjectivePosition objectivePosition, RectTransform makerRectTransform) maker in currentObjectives)
+        {
+            Vector3 offset = Vector3.ClampMagnitude(maker.objectivePosition.transform.position = Player.transform.position, cameramini.orthographicSize);
+            offset = offset / cameramini.orthographicSize * (makerParentRectTransform.rect.width / 2f);
+            Debug.Log(offset);
+            maker.makerRectTransform.anchoredPosition = new Vector2(offset.x, offset.z);
+        }
+    }
+    public override void LateUpdate()
+    {
+        if (Player)
+        {
+            Vector3 newPosition = Player.transform.position;
+            if (cameramini)
+            {
+                 newPosition.z = cameramini.gameObject.transform.position.z;
+
+                cameramini.gameObject.transform.position = newPosition;
+                cameramini.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, Player.transform.eulerAngles.z-180f);
+
+            }
+
+        }
+
     }
     private void initialize()
 	{
@@ -62,6 +102,8 @@ public class NetworkingClient : SocketIOComponent
             ni.SetSocketPreference(this);
    
             serverObjects.Add(id, ni);
+            if(ni.IsControlling())
+                Player = go;
         });
 
 
@@ -88,6 +130,15 @@ public class NetworkingClient : SocketIOComponent
             ni.transform.localEulerAngles = new Vector3(0, 0, tankRotation);
             ni.GetComponent<PlayerManager>().SetRotation(barrelRotation);
         });
+
+        //players = GameObject.FindGameObjectsWithTag("Player");
+        //foreach (GameObject player in players)
+        //{
+        //    if (!player.GetComponent<NetworkIdentity>().IsControlling())
+        //    {
+        //        Player = player;
+        //    }
+        //}
     }
 
     private void disconnected(SocketIOEvent E)
@@ -98,15 +149,28 @@ public class NetworkingClient : SocketIOComponent
         Destroy(go);
         serverObjects.Remove(id);
     }
-    
+    public void AddObjectiveMaker(ObjectivePosition sender)
+    {
+        RectTransform rectTransform = Instantiate(makerPrefab, makerParentRectTransform).GetComponent<RectTransform>();
+        currentObjectives.Add((sender, rectTransform));
+    }
 
- //   enum Funtions
-	//{
- //       open,
+    public void RemoveObjectiveMaker(ObjectivePosition sender)
+    {
+        if (!currentObjectives.Exists(objective => objective.objectivePosition == sender))
+            return;
+        (ObjectivePosition pos, RectTransform rectTrans) foundObj = currentObjectives.Find(objective => objective.objectivePosition == sender);
+        Destroy(foundObj.rectTrans.gameObject);
+        currentObjectives.Remove(foundObj);
+    }
 
-	//}
+    //   enum Funtions
+    //{
+    //       open,
 
-    
+    //}
+
+
 }
 [Serializable]
 public class Player

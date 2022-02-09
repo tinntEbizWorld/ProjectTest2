@@ -13,13 +13,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private float rotation = 60;
 
+
+    public Camera cameramini;
+
     [Header("Object Refenrences")]
     [SerializeField]
     private Transform barrelPivot;
 
 
-
-
+    
 
     [Header("Class Refenrences")]
     [SerializeField]
@@ -31,18 +33,36 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (networkIdentity.IsControlling())
-		{
+        //checkMovement();
+        if (networkIdentity.IsControlling())
+        {
             checkMovement();
             checkAiming();
 
+
         }
+    }
+    public void LateUpdate()
+    {
+
+        if (networkIdentity.IsControlling())
+        {
+            Vector3 newPosition = transform.position;
+            if (cameramini)
+            {
+                newPosition.z = cameramini.gameObject.transform.position.z;
+
+                cameramini.gameObject.transform.position = newPosition;
+            }
+
+        }
+
     }
     public float GetLastRotation()
 	{
