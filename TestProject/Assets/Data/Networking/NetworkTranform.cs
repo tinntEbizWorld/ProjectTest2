@@ -12,14 +12,14 @@ public class NetworkTranform : MonoBehaviour
     private Vector3 oldPosition;
 
     private NetworkIdentity networkIdentity;
-    private Player player;
+    private PLAYER2 player;
 
     private float stillCounter = 0;
     public void Start()
 	{
         networkIdentity = GetComponent<NetworkIdentity>();
         oldPosition = transform.position;
-        player = new Player();
+        player = new PLAYER2();
         player.position = new Position();
         player.position.x = 0;
         player.position.y = 0;

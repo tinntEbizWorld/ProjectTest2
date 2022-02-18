@@ -101,7 +101,7 @@ public class NetworkingClient : SocketIOComponent
     
 }
 [Serializable]
-public class Player
+public class PLAYER2
 {
     public string id;
     public Position position;
