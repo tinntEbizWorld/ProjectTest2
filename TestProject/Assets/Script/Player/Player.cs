@@ -8,10 +8,15 @@ public class Player : Singleton<Player>
 
     public PlayerStateMachine StateMachine { get; private set; }
 
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerWalkState WalkState { get; private set; }
+    public PlayerRunState RunState { get; private set; }
+
     public CharacterController controller;
     public Core core;
 
-    public bool isGrounded;
+
+public bool isGrounded;
     [SerializeField]
     private PlayerData playerData;
 
@@ -30,30 +35,31 @@ public class Player : Singleton<Player>
     private Vector3 gravityDirection;
     private Vector3 gravityMovement;
 
-    public Animator Anim { get; private set; }
+    public Animator Anim;
     protected override void Awake()
     {
         base.Awake();
-        //
-        //playerInput = new PlayerInputAction();
-
-        //playerInput.Movement.Movement.performed += x => input_Movement = x.ReadValue<Vector2>();
-
-
-
 
         StateMachine = new PlayerStateMachine();
+
+        IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
+        WalkState = new PlayerWalkState(this, StateMachine, playerData, "walk");
+        RunState = new PlayerRunState(this, StateMachine, playerData, "run");
+
         gravityDirection = Vector3.down;
     }
     private  void Start()
     {
-        Anim = GetComponent<Animator>();
+        StateMachine.Initialize(IdleState);
+
         
     }
     private void Update()
     {
         CalculateGravity();
         isGrounded = core.collisionSenses.Ground;
+
+        StateMachine.CurrentState.LogicUpdate();
     }
 
     private void FixedUpdate()

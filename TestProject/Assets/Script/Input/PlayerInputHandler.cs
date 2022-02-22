@@ -9,9 +9,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     public Vector2 RawMovementInput { get; private set; }
     public int NormInputX { get; private set; }
-    public int NormInputY { get; private set; }
+    public int NormInputZ { get; private set; }
     public bool JumpInput { get; private set; }
     public bool JumpInputStop { get; private set; }
+    public bool RunInput { get; private set; }
 
 
 
@@ -24,9 +25,8 @@ public class PlayerInputHandler : MonoBehaviour
         RawMovementInput = context.ReadValue<Vector2>();
         // Debug.Log(RawMovementInput);
         NormInputX = Mathf.RoundToInt(RawMovementInput.x);
-        NormInputY = Mathf.RoundToInt(RawMovementInput.y);
-        Debug.Log("X : " + NormInputX);
-        Debug.Log("Y : " + NormInputY);
+        NormInputZ = Mathf.RoundToInt(RawMovementInput.y);
+
     }
     public void OnJumpInput(InputAction.CallbackContext context)
     {
@@ -40,6 +40,19 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.canceled)
         {
             JumpInputStop = true;
+        }
+    }
+    public void OnRunInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            RunInput = true;
+
+        }
+
+        if (context.canceled)
+        {
+            RunInput = false;
         }
     }
 

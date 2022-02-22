@@ -26,6 +26,8 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        player.core.movement.setVelocity(0);
+
     }
 
     public override void Exit()
@@ -36,6 +38,25 @@ public class PlayerIdleState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (xInput != 0 || zInput != 0)
+        {
+            stateMachine.ChangeState(player.WalkState);
+        }else
+        if (runInput)
+        {
+            stateMachine.ChangeState(player.RunState);
+        }
+        //if (!isExitingState)
+        //{
+        //    if (xInput != 0 || yInput !=0)
+        //    {
+        //        stateMachine.ChangeState(player.WalkState);
+        //    }
+        //    //else if (yInput == -1)
+        //    //{
+        //    //    stateMachine.ChangeState(player.CrouchIdleState);
+        //    //}
+        //}
     }
 
     public override void PhysicUpdate()
