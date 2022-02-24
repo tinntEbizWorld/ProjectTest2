@@ -137,6 +137,7 @@
     <Compile Include="Assets\Data\SocketIO\WebsocketSharp\Net\EndPointManager.cs" />
     <Compile Include="Assets\Script\Player\PlayerStateMachine.cs" />
     <Compile Include="Assets\Data\SocketIO\WebsocketSharp\Net\HttpListenerContext.cs" />
+    <Compile Include="Assets\Script\Player\PlayerState\SubState\PlayerRunState.cs" />
     <Compile Include="Assets\Script\Input\PlayerInputAction.cs" />
     <Compile Include="Assets\Data\SocketIO\WebsocketSharp\WebSocketState.cs" />
     <Compile Include="Assets\Data\SocketIO\Scripts\SocketIO\Encoder.cs" />
@@ -165,7 +166,7 @@
     <Compile Include="Assets\Data\SocketIO\WebsocketSharp\Net\Chunk.cs" />
     <Compile Include="Assets\Data\SocketIO\WebsocketSharp\Net\InputChunkState.cs" />
     <Compile Include="Assets\Data\SocketIO\WebsocketSharp\LogLevel.cs" />
-    <Compile Include="Assets\Script\Player\PlayerState\SubState\PlayerRunState.cs" />
+    <Compile Include="Assets\Script\Player\PlayerState\SupperState\PlayerAbilityState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

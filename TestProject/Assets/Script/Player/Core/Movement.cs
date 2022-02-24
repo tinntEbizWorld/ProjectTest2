@@ -31,17 +31,7 @@ public class Movement : CoreComponent
 		blockRotationPlayer = false;
 
 	}
- //   private void Update()
- //   {
-	//	int x = Player.instance.playerInput.NormInputX;
-	//	int z = Player.instance.playerInput.NormInputY;
-	//	PlayerMoveAndRotation(x, z);
 
-	//}
- //   private void FixedUpdate()
- //   {
-	//	RotateToCamera(cam.transform);
-	//}
     public void PlayerMoveAndRotation(int x, int z)
 	{
 		var forward = cam.transform.forward;

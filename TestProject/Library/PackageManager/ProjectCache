@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637807675369278000
-    m_Hash: 767686996
+      ticks: 637812737957966650
+    m_Hash: 1229773311
   m_LockFileStatus:
     m_FilePath: "Z:/WorkPlace/C\xE1 nh\xE2n/ProjectTest2/TestProject/Packages/packages-lock.json"
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637807675369836537
-    m_Hash: 2893832325
+      ticks: 637812737958584890
+    m_Hash: 3448869001
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -71,12 +71,12 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
-    - packageId: com.unity.cinemachine@2.3.4
+    - packageId: com.unity.cinemachine@2.6.11
       testable: 0
       isDirectDependency: 1
-      version: 2.3.4
+      version: 2.6.11
       source: 1
-      resolvedPath: "Z:\\WorkPlace\\C\xE1 nh\xE2n\\ProjectTest2\\TestProject\\Library\\PackageCache\\com.unity.cinemachine@2.3.4"
+      resolvedPath: "Z:\\WorkPlace\\C\xE1 nh\xE2n\\ProjectTest2\\TestProject\\Library\\PackageCache\\com.unity.cinemachine@2.6.11"
       assetPath: Packages/com.unity.cinemachine
       name: com.unity.cinemachine
       displayName: Cinemachine
@@ -222,13 +222,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 636942204440000000
+      datePublishedTicks: 637715450880000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
-        url: https://github.com/Unity-Technologies/upm-package-cinemachine
-        revision: 679387cb1fa822190b530bdbb8ea0945f508b5f6
+        url: https://github.com/Unity-Technologies/com.unity.cinemachine.git
+        revision: 0eef4802dbe9ea60fc58767471ce4c5ea86632de
         path: 
     - packageId: com.unity.collab-proxy@1.13.5
       testable: 0
@@ -824,6 +824,7 @@ m_PackageAssets:
         - 3.1.0
         - 3.1.1
         - 3.2.0
+        - 3.2.1
         compatible:
         - 2.3.0
         - 3.0.1
@@ -831,6 +832,7 @@ m_PackageAssets:
         - 3.1.0
         - 3.1.1
         - 3.2.0
+        - 3.2.1
         verified: 3.1.1
       dependencies: []
       resolvedDependencies: []
@@ -3275,7 +3277,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: library
+      type: 
       description: 'Newtonsoft Json for use in Unity projects and Unity packages.
         Currently synced to version 12.0.2.
 
@@ -3290,10 +3292,30 @@ m_PackageAssets:
       errors: []
       versions:
         all:
+        - 1.0.0-preview.2
+        - 1.0.0-preview.3
+        - 1.0.0-preview.4
+        - 1.0.1-preview.1
+        - 1.1.2
+        - 2.0.0-preview
+        - 2.0.0-preview.1
+        - 2.0.0-preview.2
         - 2.0.0
+        - 2.0.1-preview.1
+        - 2.0.2
         compatible:
+        - 1.0.0-preview.2
+        - 1.0.0-preview.3
+        - 1.0.0-preview.4
+        - 1.0.1-preview.1
+        - 1.1.2
+        - 2.0.0-preview
+        - 2.0.0-preview.1
+        - 2.0.0-preview.2
         - 2.0.0
-        verified: 2.0.0
+        - 2.0.1-preview.1
+        - 2.0.2
+        verified: 2.0.2
       dependencies: []
       resolvedDependencies: []
       keywords: []
@@ -3309,7 +3331,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 637237898320000000
       documentationUrl: 
       hasRepository: 1
       repository:
@@ -3342,8 +3364,22 @@ m_PackageAssets:
       versions:
         all:
         - 1.0.1
+        - 1.1.0-pre.7
+        - 1.1.0-pre.8
+        - 1.1.0-pre.9
+        - 1.1.0-pre.10
+        - 1.1.0-pre.11
+        - 1.1.0-pre.41
+        - 1.1.0-pre.69
         compatible:
         - 1.0.1
+        - 1.1.0-pre.7
+        - 1.1.0-pre.8
+        - 1.1.0-pre.9
+        - 1.1.0-pre.10
+        - 1.1.0-pre.11
+        - 1.1.0-pre.41
+        - 1.1.0-pre.69
         verified: 1.0.1
       dependencies:
       - name: com.unity.modules.unitywebrequest
@@ -3364,7 +3400,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 637604883250000000
       documentationUrl: 
       hasRepository: 1
       repository:
