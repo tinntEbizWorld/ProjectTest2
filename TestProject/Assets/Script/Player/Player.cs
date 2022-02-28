@@ -16,12 +16,12 @@ public class Player : Singleton<Player>
     public Core core;
 
 
-public bool isGrounded;
+    public bool isGrounded;
     [SerializeField]
     private PlayerData playerData;
 
     [Header("Gravity")]
-    public float gravity;
+    public float gravity = 10;
     public float currentGravity;
     public float constantGravity;
     public float maxGravity;
@@ -33,13 +33,12 @@ public bool isGrounded;
 
 
     private Vector3 gravityDirection;
-    private Vector3 gravityMovement;
+    public Vector3 gravityMovement;
 
     public Animator Anim;
     protected override void Awake()
     {
         base.Awake();
-
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -51,7 +50,7 @@ public bool isGrounded;
     private  void Start()
     {
         StateMachine.Initialize(IdleState);
-
+        
         
     }
     private void Update()
@@ -59,6 +58,7 @@ public bool isGrounded;
         CalculateGravity();
         isGrounded = core.collisionSenses.Ground;
 
+        controller.Move(gravityMovement);
         StateMachine.CurrentState.LogicUpdate();
     }
 

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Movement : CoreComponent
 {
-    public CharacterController controller;
+	public Transform cam;
 
-	public float Velocity;
 	public float Speed;
 
-	public Vector3 desiredMoveDirection;
 	public bool blockRotationPlayer;
 	public float desiredRotationSpeed = 0.1f;
+
+	public float turnSmoothTime = 0.1f;
+	float turnSmoothVelocity;
 
 	public bool CanSetVelocity { get; set; }
 
@@ -19,7 +20,6 @@ public class Movement : CoreComponent
 
     private Vector2 workspace;
 
-	public Camera cam;
 
 	protected override void Awake()
     {
@@ -27,39 +27,27 @@ public class Movement : CoreComponent
     }
     private void Start()
     {
-		cam = Camera.main;
+
 		blockRotationPlayer = false;
 
 	}
 
-    public void PlayerMoveAndRotation(int x, int z)
+    public void PlayerMoveAndRotation(int x, int z, float speed)
 	{
-		var forward = cam.transform.forward;
-		var right = cam.transform.right;
+		Vector3 direction = new Vector3(x, 0f, z).normalized;
 
-		forward.y = 0f;
-		right.y = 0f;
 
-		forward.Normalize();
-		right.Normalize();
-
-		desiredMoveDirection = forward * z + right * x;
-
-		if (blockRotationPlayer == false)
+		if (blockRotationPlayer == false && direction.magnitude >= 0.1f) 
 		{
-			//Player.instance.transform.rotation = Quaternion.Slerp(Player.instance.transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-			controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
-		}
-	}
-	public void setVelocity(float value)
-    {
-		Velocity = value;
-    }
-	public void RotateToCamera(Camera cam)
-	{
-		desiredMoveDirection = cam.transform.forward;
+			float targetAgle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+			float angle = Mathf.SmoothDampAngle(Player.instance.transform.eulerAngles.y, targetAgle, ref turnSmoothVelocity, turnSmoothTime);
+			Player.instance.transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-		cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+			Vector3 moveDirection = Quaternion.Euler(0f, targetAgle, 0f) * Vector3.forward;
+			Vector3 playerMove = moveDirection.normalized * Time.deltaTime * speed;
+			Player.instance.controller.Move(moveDirection.normalized * Time.deltaTime * speed);
+			
+		}
 	}
 
 

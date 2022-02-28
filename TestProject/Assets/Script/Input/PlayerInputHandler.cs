@@ -56,15 +56,4 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-
-    }
-
-    private void Update()
-    {
-        
-    }
-
 }

@@ -27,7 +27,6 @@ public class PlayerWalkState : PlayerGroundedState
     {
         base.Enter();
         Debug.Log("walking");
-        player.core.movement.setVelocity(playerData.movementVelocity);
     }
 
     public override void Exit()
@@ -38,7 +37,7 @@ public class PlayerWalkState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        player.core.movement.PlayerMoveAndRotation(xInput,zInput);
+        player.core.movement.PlayerMoveAndRotation(xInput,zInput,playerData.movementVelocity);
         
         if (!isExitingState)
         {

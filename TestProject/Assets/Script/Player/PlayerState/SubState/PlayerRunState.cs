@@ -27,7 +27,6 @@ public class PlayerRunState : PlayerGroundedState
     {
         base.Enter();
         Debug.Log("runing");
-        player.core.movement.setVelocity(playerData.RunVelocity);
 
     }
 
@@ -39,7 +38,7 @@ public class PlayerRunState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        player.core.movement.PlayerMoveAndRotation(xInput, zInput);
+        player.core.movement.PlayerMoveAndRotation(xInput, zInput,playerData.RunVelocity);
 
         if (!isExitingState)
         {

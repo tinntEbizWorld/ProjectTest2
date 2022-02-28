@@ -42,7 +42,7 @@ public class PlayerAbilityState : PlayerState
         base.LogicUpdate();
         if (isAbilityDone)
         {
-            if(isGrounded && player.core.movement.)
+            //if(isGrounded && player.core.movement.)
         }
     }
 
